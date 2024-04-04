@@ -25,8 +25,8 @@ def get_programs_in_path(path):
         files = os.listdir(path)
         # фильтруем файлы, чтобы остались только исполняемые программы
         programs = [file for file in files if
-                    os.path.isfile(os.path.join(path, file)) and (file.endswith('.exe') or file.endswith('.dll'))]
-
+                    (file.endswith(".exe") or file.endswith(".dll"))]
+        
     return programs
 
 
@@ -70,20 +70,20 @@ class Server:
 
 
     async def handle_client(self, reader, writer):
-        res = None
+        result = None
         input_data = await reader.read(1)
         input_data = input_data.decode('utf-8')
 
         if input_data == "1":
             print("varya")
-            res = await self.varya(reader)
+            result = await self.varya(reader)
 
         #elif input_data == "2":
             #print("polina")
-            #res = await self.polina(reader)
+            #result = await self.polina(reader)
 
-        if res:
-            writer.write(res.encode('utf-8'))
+        if result:
+            writer.write(result)
             writer.close()
             await writer.wait_closed()
 
@@ -100,7 +100,9 @@ class Server:
                     programs_info = get_programs_in_path_env()
                     # Сохраняем информацию в файл
                     save_programs_info_to_file(programs_info, "programs_info.json")
-        return f"Сохранено в файл programs_info.json"
+        json_file = json.dumps(programs_info).encode('utf-8')
+        return json_file
+
     
     def start(self, is_async=True):
         #if is_async:
