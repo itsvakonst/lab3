@@ -3,6 +3,7 @@
 import socket
 import asyncio
 import threading
+import lab2
 
 
 class Handler:
@@ -11,7 +12,7 @@ class Handler:
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super().__new__(cls)
-            cls._instance.__setattr__('handlers', {})
+            cls._instance.__setattr__('handlers', {'update': lab2.handle_event})
             cls._instance.__setattr__('async_handlers', {})
         return cls._instance
 
