@@ -84,8 +84,8 @@ class Server:
         input_data = await reader.read(1)
         input_data = input_data.decode('utf-8')
 
-        if input_data == "1":
-            print("Программа 1")
+        if input_data == "3":
+            print("dasha")
             result = await self.receive_changes(reader)
 
         if result:
