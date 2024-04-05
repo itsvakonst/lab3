@@ -11,7 +11,7 @@ client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_socket.connect((HOST, PORT))
 print(f"Подключение к серверу {HOST}:{PORT} успешно!")
 
-client_socket.send('1'.encode('utf-8')) 
+client_socket.send('3'.encode('utf-8')) 
 def pack_data(data):
     """
     Упаковывает данные перед отправкой через сокет.
